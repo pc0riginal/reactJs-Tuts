@@ -1,14 +1,27 @@
 //  javascript XML - jsxh
 import Home from './Home'
 import Navbar from './Navbar';
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
+import Create from './Create';
 
 function App() {
 
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
       <Navbar />
-      <Home />
-    </div>
+        <div className="content">
+          <Switch>
+            <Route exact path='/' >
+              <Home />
+            </Route>
+            <Route path='/create' >
+              <Create />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>   
   );
 }
 
