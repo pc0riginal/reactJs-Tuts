@@ -5,8 +5,9 @@ const useFetch = (url) => {
     let [isPanding,setPanding] = useState(true)
     let [error,setError] = useState(null)
     useEffect(()=>{
+        const abortCon = new AbortController()
         setTimeout(()=>{
-            fetch(url)
+            fetch(url,{signal:abortCon.signal})
             .then(res =>{
                 if (!res.ok){
                     throw Error('request resource not found!') //user defined
@@ -19,11 +20,20 @@ const useFetch = (url) => {
                 setError(null)
             })
             .catch((err)=>{
-                setPanding(false)
-                setError(err.message)
-            })
+                if(err.name === 'AbortError'){
+                    console.log(err)
+                } else{
+                    setPanding(false)
+                    setError(err.message)
+                }
+            })   
         },1000)
+        return() =>{
+            console.log('cleanup!')
+            abortCon.abort()
+        }
     },[url]) 
+
     return {blogs,isPanding,error,setBlogs,setError}
 }
  
