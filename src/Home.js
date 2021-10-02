@@ -2,14 +2,25 @@ import BlogList from './BlogList'
 import Loding from './Loding'
 import {Modal,Button} from 'react-bootstrap'
 import useFetch from './useFetch'
+import { useHistory } from 'react-router'
 
 function Home() {
     const {blogs,isPanding,error,setBlogs,setError} = useFetch("http://localhost:8000/blogs")
-
+    const history = useHistory()
     const handleDelete = (id)=>{
-        const newBlogs = blogs.filter((blog)=> blog.id !== id
-        )  // true will be remain others will be deleted
-        setBlogs(newBlogs)        
+        const newBlogs = blogs.filter((blog)=> blog.id !== id)  // true will be remain others will be deleted
+        
+        fetch("http://localhost:8000/blogs/"+id,{
+            method:'DELETE'
+        })
+        .then(()=>{
+            setBlogs(newBlogs) 
+            // history.push('/')
+        })
+        .catch((err)=>{
+            alert(err.message)
+        })
+               
     }
     
 
