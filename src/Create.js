@@ -12,7 +12,7 @@ const Create = () => {
         setIsPending(true)
         e.preventDefault() // it will prevent from page load
         const blog = {title,body,author}
-        fetch('http://localhost:8000/blogs',{
+        fetch('https://codeblogserver.herokuapp.com/blogs',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(blog)

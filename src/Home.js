@@ -5,12 +5,12 @@ import useFetch from './useFetch'
 import { useHistory } from 'react-router'
 
 function Home() {
-    const {blogs,isPanding,error,setBlogs,setError} = useFetch("http://localhost:8000/blogs")
+    const {blogs,isPanding,error,setBlogs,setError} = useFetch("https://codeblogserver.herokuapp.com/blogs")
     const history = useHistory()
     const handleDelete = (id)=>{
         const newBlogs = blogs.filter((blog)=> blog.id !== id)  // true will be remain others will be deleted
         
-        fetch("http://localhost:8000/blogs/"+id,{
+        fetch("https://codeblogserver.herokuapp.com/blogs/"+id,{
             method:'DELETE'
         })
         .then(()=>{

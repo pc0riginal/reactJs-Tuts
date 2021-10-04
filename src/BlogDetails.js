@@ -4,9 +4,9 @@ import useFetch from "./useFetch";
 const BlogDetails = () => {
     const params = useParams()
     const history = useHistory()
-    const {blogs:blog,isPanding:isPending,error} = useFetch("http://localhost:8000/blogs/"+params.id)
+    const {blogs:blog,isPanding:isPending,error} = useFetch("https://codeblogserver.herokuapp.com/blogs/"+params.id)
     const handleDelete = () =>{
-        fetch("http://localhost:8000/blogs/"+params.id,{
+        fetch("https://codeblogserver.herokuapp.com/blogs/"+params.id,{
             method:'DELETE'
         })
         .then(()=>{
